@@ -57,8 +57,7 @@ return string.toUpperCase();
  */
 function toDashCase(string) {
     // YOUR CODE BELOW HERE //
-return string.split("-");
-
+return string.split(" ").join("-").toLowerCase();
 
     // YOUR CODE ABOVE HERE //
 }
@@ -76,9 +75,14 @@ return string.split("-");
  *      ensure uppercase and lowercase can be compared equally?
  */
 function beginsWith(string, char) {
-    // YOUR CODE BELOW HERE //
-
-    
+    // YOUR CODE BELOW HERE /
+    var lowerCaseString = string.toLowerCase();
+    var lowerCaseChar = char.toLowerCase();
+if(lowerCaseString[0] === lowerCaseChar){
+    return true
+}else{
+    return false
+}
 
     // YOUR CODE ABOVE HERE //
 }
