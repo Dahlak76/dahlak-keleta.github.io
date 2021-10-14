@@ -89,7 +89,16 @@ function modifyStrings(strings, modify) {
  */
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
-    
+    var i = 0;
+    var boolean = true;
+
+    while (boolean === true && i < strings.length) {
+        boolean = test(strings[i]);
+        i++;
+    }
+
+    return boolean;
+
     
     
     
