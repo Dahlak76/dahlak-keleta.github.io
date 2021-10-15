@@ -35,7 +35,7 @@
 
 // YOUR CODE GOES BELOW HERE //
 function makeContact(id, nameFirst, nameLast) {
-
+            
 } 
 
 
@@ -52,20 +52,30 @@ function makeContactList() {
         length: function() {
             return contacts.length;
         },
-        addContact: function(contact){
+        addContact: function(){
             contacts.push(contacts);
         },
-        findContact: function(fullName){
-            if(fullName === true){
-            return nameFirst + " " + nameLast;
-            }else{
-                return undefined;
+        findContact: function(){
+            for(var i = 0; i < contacts.length; i++){
+                if(fullName === contacts[i]["nameFirst"] + " " + contacts[i]["nameLast"]){
+                    return contacts[i];
+                }
             }
         },
         removeContact: function(contact){
+            for(var i = 0; i <= contacts.length - 1; i++){
+                if(contacts[i].id === contact.id){
+                    returncontacts.splice(i,1);
+                }
+            }
         },
-        function printAllContactNames(){
-            
+        printAllContactNames(){
+            var fullNames = [];
+            for(var i = 0; i < contacts.length - 1; i++){
+                fullNames.push(contacts[i].nameFirst + " " + contacts[i].nameLast);
+                console.log(fullNames);
+            }
+            return fullNames.join("\n");
         }
         
     }
