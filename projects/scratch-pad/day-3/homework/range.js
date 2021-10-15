@@ -32,7 +32,7 @@ function range(start, end) {
       for(var i = start; i >= end; i--){
         rangeArr.push(i);
       }
-    }
+    }return rangeArr;
     
     // YOUR CODE GOES ABOVE HERE //
 }
