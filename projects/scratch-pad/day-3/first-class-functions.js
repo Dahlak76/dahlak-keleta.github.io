@@ -13,7 +13,7 @@
  */
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+    console.log(base)
     
     
     
@@ -71,7 +71,12 @@ function createEndsWithFilter(endsWith) {
  */
 function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
-    
+    var newColl = [];
+    for(var str in strings){
+        var newStr = modify(str);
+        return newColl.push(newStr);
+        
+    }
     
     
     

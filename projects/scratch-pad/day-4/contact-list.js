@@ -63,12 +63,15 @@ function makeContactList() {
             }
         },
         removeContact: function(contact){
+        },
+        function printAllContactNames(){
+            
         }
         
     }
     
 }
-contacts.printAllContactNames();
+
 
 
 
