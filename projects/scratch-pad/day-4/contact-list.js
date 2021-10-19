@@ -35,7 +35,12 @@
 
 // YOUR CODE GOES BELOW HERE //
 function makeContact(id, nameFirst, nameLast) {
-            
+    var contact = {};
+        contact.id = id;
+        contact.nameFirst = nameFirst;
+        contact.nameLast = nameLast;
+    
+       return contact; 
 } 
 
 
@@ -44,34 +49,37 @@ function makeContactList() {
      * You need something here to hold contacts. See length api for a hint:
      */
     var contacts = []; // var contacts = [makeContactsList()]??
-    // contacts.id = id;
-    // contacts.nameFirst = nameFirst;
-    // contacts.nameLast = nameLast;
+
+    
     return {
         // we implemented the length api for you //
         length: function() {
             return contacts.length;
         },
-        addContact: function(){
-            contacts.push(contacts);
+        addContact: function(contact){
+            
+            contacts.push(contact);
         },
-        findContact: function(){
-            for(var i = 0; i < contacts.length; i++){
-                if(fullName === contacts[i]["nameFirst"] + " " + contacts[i]["nameLast"]){
+        findContact: function(fullName) {
+            var newFullName = fullName.split(" ");
+            for (var i = 0; i < contacts.length; i++){
+                if (newFullName[0] === contacts[i]["nameFirst"] && newFullName[1] === contacts[i]["nameLast"]){
                     return contacts[i];
+                }else {
+                    return undefined;
                 }
             }
         },
-        removeContact: function(contact){
-            for(var i = 0; i <= contacts.length - 1; i++){
-                if(contacts[i].id === contact.id){
-                    returncontacts.splice(i,1);
+        removeContact: function(contact) {
+            for (var i = 0; i <= contacts.length - 1; i++){
+                if (contacts[i] === contact){
+                    return contacts.splice(i,1);
                 }
             }
         },
         printAllContactNames(){
             var fullNames = [];
-            for(var i = 0; i < contacts.length - 1; i++){
+            for(var i = 0; i <= contacts.length - 1; i++){
                 fullNames.push(contacts[i].nameFirst + " " + contacts[i].nameLast);
                 console.log(fullNames);
             }
