@@ -49,14 +49,17 @@ function remove(animals, name){
 // Step 4 - Add ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 function add(animals, animal){
-    for(var i = 0; i < animals.length; i++){
-        for(var key in animal){
-            if(animal.name.length > 0 && animal.species.length > 0 && animal.name === animals[i].name){
-                animals.push(animal)
-            } 
+    var nameMatches = false; //create a boolean flag variable to test names
+    for(var i = 0; i < animals.length; i++){ //loop through animals array
+        if(animals[i].name === animal.name){ //if name equals animal obj name return true
+            nameMatches = true;
+            }
         }
-    }
-}
+        //if nameMatches is false & animalObj name & species length greater than 0
+        if(nameMatches !== true && animal.name.length > 0 && animal.name.length >0){
+            animals.push(animal); //push animalObj into animals arr
+        }
+    };
 
 
 /**
