@@ -144,13 +144,13 @@ function isFriend(name, object) {
 
 function nonFriends(name, array) {
     var arrFriends = name.friends;// declare array that equals name parameter and friends properties
-    //loop thru array
-    for(var i = 0; i < arrFriends.length; i++){
-        if(name === object.friends[i]){
-            return true;
-        }
-    } 
-    return false;
+    // //loop thru array
+    // for(var i = 0; i < arrFriends.length; i++){
+    //     if(name === object.friends[i]){
+    //         return true;
+    //     }
+    // } 
+    // return false;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -158,8 +158,8 @@ function nonFriends(name, array) {
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-    object = Object.hasOwnProperty(key);//check existance of key and add it if need be
-    object["key"] = value;//add new value to key
+    // object = Object.hasOwnProperty(key);//check existance of key and add it if need be
+    // object["key"] = value;//add new value to key
     
 }
 
@@ -168,7 +168,13 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-
+// for(var i = 0; i < object.length; i++){
+//     for(var j = 0; j < array.length; i++){
+//         if(object[i] === array[j]{
+//             remove object[i];
+//         })
+//     }
+// }
 }
 
 //////////////////////////////////////////////////////////////////////

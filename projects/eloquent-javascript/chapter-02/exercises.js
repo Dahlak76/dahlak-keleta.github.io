@@ -4,6 +4,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 function triangles() {
+  for (let i = "#"; triangles.length <= 7; i += "#")
+  console.log(i);
 
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -11,7 +13,23 @@ function triangles() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function fizzBuzz() {
-  
+  // for(i = 0; i <= 100; i++){
+  //   let output = "";
+  //   if(i % 5 == 0 && i % 3 != 0){
+  //     console.log("Buzz");
+  //     }else if(i % 3 == 0 && i % 5 != 0){
+  //       console.log("Fizz");
+  //       }else if(i % 5 == 0 && i % 3 == 0){
+  //         console.log("FizzBuzz");
+  //       }console.log(output || i);
+  //     }
+    
+  for (let n = 1; n <= 15; n++) {
+    let output = "";
+    if (n % 3 == 0) output += "fizz";
+    if (n % 5 == 0) output += "buzz";
+    console.log(output || n);
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -19,7 +37,22 @@ function fizzBuzz() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function drawChessboard() {
+  let size = 8;
 
+  let board = "";
+  
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      if ((x + y) % 2 == 0) {
+        board += " ";
+      } else {
+        board += "#";
+      }
+    }
+    board += "\n";
+  }
+  
+  console.log(board);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
