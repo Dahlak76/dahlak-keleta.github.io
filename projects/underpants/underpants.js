@@ -49,8 +49,25 @@ _.identity = function(value){
 * _.typeOf([1,2,3]) -> "array"
 */
 _.typeOf = function(value){
+    if(typeof(value) === "string"){
     return "string";
-}
+    }else if(Array.isArray(value) === true){
+        return "array";
+    }else if(typeof(value) === "object" && value !== null){
+        return "object";
+    }else if(typeof(value) === "undefined"){
+        return "undefined";
+    }else if(typeof(value) === "number"){
+        return "number";
+    }else if(typeof(value) === "boolean"){
+        return "boolean";
+    }else if(value === null){
+        return "null";
+    }else{
+        return "function";
+    }
+};
+
 
 
 /** _.first
@@ -70,6 +87,21 @@ _.typeOf = function(value){
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
+_.first = function(arr, num){  //func with arr and num as argument
+         if(Array.isArray(arr) === false){   //if arr is not arr return []
+             return [];
+         }                                   
+         else if(num === null || isNaN(num)){
+             return arr[0];                 // if num is absent or nan return 1st element in arr
+         }else if(num < 0){                 //if num is negative return []
+             return [];                     
+         }else if(num > arr.length){        //if num is > than arr return arr
+             return arr;
+         }else{                             // else return 1st num items of arr
+             return arr.length - 1;
+         }
+              
+         }                          
 
 
 /** _.last
@@ -89,8 +121,22 @@ _.typeOf = function(value){
 *   _.last(["a", "b", "c"], 1) -> "c"
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
+_.last = function(arr, num){
+                            //if arr is not an arr return []
+if(Array.isArray(arr) === false){   
+    return [];
+}                           //if num is null or nan return last element in arr
+else if(num === null || isNaN(num)){
+    return arr[arr.length - 1];                 
+}                           //make sure num is not negative or > arr length
+else if(num < 0){            //return empty arr   
+    return [];                     
+}                           //return whole arr if num > arr length
+else if(num > arr.length){        
+    return arr;             // else return last num item of arr
+}
 
-
+}
 /** _.indexOf
 * Arguments:
 *   1) An array
@@ -106,7 +152,11 @@ _.typeOf = function(value){
 *   _.indexOf(["a","b","c"], "c") -> 2
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
-
+_.indexOf = function(arr, value){
+//return index of arr at first occurance and stop loop
+for(var i = 0;)
+//return -1 if value is not in arr
+}
 
 /** _.contains
 * Arguments:
@@ -122,7 +172,9 @@ _.typeOf = function(value){
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
+_.contains = function(arr, value){
 
+}
 
 /** _.each
 * Arguments:
@@ -139,7 +191,9 @@ _.typeOf = function(value){
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
+_.each = function(coll, func){
 
+}
 
 /** _.unique
 * Arguments:
