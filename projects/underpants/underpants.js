@@ -87,22 +87,42 @@ _.typeOf = function(value){
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
-_.first = function(arr, num){  //func with arr and num as argument
-         if(Array.isArray(arr) === false){   //if arr is not arr return []
-             return [];
-         }                                   
-         else if(num === null || isNaN(num)){
-             return arr[0];                 // if num is absent or nan return 1st element in arr
-         }else if(num < 0){                 //if num is negative return []
-             return [];                     
-         }else if(num > arr.length){        //if num is > than arr return arr
-             return arr;
-         }else{                             // else return 1st num items of arr
-             return arr.length - 1;
-         }
+// _.first = function(arr, num){  //func with arr and num as argument
+//     var output = [];
+//          if(Array.isArray(arr) === false){   //if arr is not arr return []
+//              return output;
+//          }                                   
+//          else if(num === null || isNaN(num)){
+//              return arr[0];                 // if num is absent or nan return 1st element in arr
+//          }else if(num < 0){                 //if num is negative return []
+//              return [];                     
+//          }else if(num > arr.length){        //if num is > than arr return arr
+//              return arr;
+//          }else if(typeof num === "number"){
+//             return arr.splice(0, arr.length - num + 1)
+//          }
               
-         }                          
-
+//          }                          
+         _.first = function(array, num) {
+            // if array is not an array or if num is negative return [];
+            var newArr = [];
+           if (Array.isArray(array) === false) {
+               return [];
+           } else if (num === null || isNaN(num)) {
+               return array[0];
+           } else if (num <= 0) {
+                return [];
+           } else if (num > array.length) {
+               return array;
+           } else if (num === 1) {
+           return array[0];
+           }  
+           for (var i = 0; i < num; i++) {
+               newArr.push(array[i]);
+           }
+           return newArr;
+        }
+        
 
 /** _.last
 * Arguments:
@@ -123,8 +143,9 @@ _.first = function(arr, num){  //func with arr and num as argument
 */
 _.last = function(arr, num){
                             //if arr is not an arr return []
+  var output = [];                          
 if(Array.isArray(arr) === false){   
-    return [];
+    return output;
 }                           //if num is null or nan return last element in arr
 else if(num === null || isNaN(num)){
     return arr[arr.length - 1];                 
@@ -135,8 +156,15 @@ else if(num < 0){            //return empty arr
 else if(num > arr.length){        
     return arr;             // else return last num item of arr
 }
+else if(typeof num === "number"){
+    for(var i = arr.length -1; i > 0; i--){
+    return arr.slice(arr.length- 1 - 1);
+    }
+ }
+
 
 }
+
 /** _.indexOf
 * Arguments:
 *   1) An array
@@ -154,8 +182,11 @@ else if(num > arr.length){
 */
 _.indexOf = function(arr, value){
 //return index of arr at first occurance and stop loop
-for(var i = 0;)
-//return -1 if value is not in arr
+for(var i = 0; i < arr.length; i++){
+    if(value === arr[i]){
+        return i
+    }
+   }return - 1;
 }
 
 /** _.contains

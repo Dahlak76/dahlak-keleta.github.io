@@ -130,27 +130,47 @@ function addFriend (name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function isFriend(name, object) {
-    if(object.friends === object.friends && object.friends.includes(name)){
-        return true;
-    }else{
-        return false;
-    }
-        
+    if(object.friends === undefined)return false;
+    if(object.friends.includes(name)) return true;
+    return false;  
 }
 // if the object with a friends array doesn't exist, return false
 //////////////////////////////////////////////////////////////////////
 // Function 13 - Non-Friends /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
-
+// var data = [
+//     {name: "Jimmy", friends:["Sara", "Liza"]},
+//     {name: "Bob", friends:[]},
+//     {name: "Liza", friends: ["Jimmy"]},
+//     {name: "Sara", friends: ["Jimmy"]}
+//   ];
 function nonFriends(name, array) {
-    var arrFriends = name.friends;// declare array that equals name parameter and friends properties
-    // //loop thru array
-    // for(var i = 0; i < arrFriends.length; i++){
-    //     if(name === object.friends[i]){
-    //         return true;
+    // var notFriends = [];
+    // for(var i = 0; i <array.length; i++){
+    //     var currentName = array[i].name;
+    //     console.log(currentName);
+    //     if(currentName === name){
+    //         var nameIndex = i;
     //     }
-    // } 
-    // return false;
+    //     if(array[nameIndex].friends.length === 0) {
+    //         return [];
+    //     }
+    //     else if(!array[nameIndex].friends.includes(currentName) && currentName !== name){
+    //         notFriends.push(currentName);
+    //     }
+    // }                                                           
+    // return notFriends;
+    var arrFriends = name.friends;// declare array that equals name parameter and friends properties
+    //loop thru array
+    for(var i = 0; i < arrFriends.length; i++){
+        if(name !== array[i].name){
+           if(array[I].includes(name) === false){
+            arrFriends.push(array[i]);
+           }
+;
+        }
+    }
+    return false;
 }
 
 //////////////////////////////////////////////////////////////////////
