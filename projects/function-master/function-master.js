@@ -145,32 +145,21 @@ function isFriend(name, object) {
 //     {name: "Sara", friends: ["Jimmy"]}
 //   ];
 function nonFriends(name, array) {
-    // var notFriends = [];
-    // for(var i = 0; i <array.length; i++){
-    //     var currentName = array[i].name;
-    //     console.log(currentName);
-    //     if(currentName === name){
-    //         var nameIndex = i;
-    //     }
-    //     if(array[nameIndex].friends.length === 0) {
-    //         return [];
-    //     }
-    //     else if(!array[nameIndex].friends.includes(currentName) && currentName !== name){
-    //         notFriends.push(currentName);
-    //     }
-    // }                                                           
-    // return notFriends;
-    var arrFriends = name.friends;// declare array that equals name parameter and friends properties
-    //loop thru array
-    for(var i = 0; i < arrFriends.length; i++){
-        if(name !== array[i].name){
-           if(array[I].includes(name) === false){
-            arrFriends.push(array[i]);
+   var nameList = [];
+   var output= [];
+   var current = null;
+    // declare array that equals name parameter and friends properties
+    for(var i = 0; i < array.length; i++){
+        if(name === array[i].name){
+           if(array[i].friends.includes(array[i].name) === false){
+               current.push(array[i]);
+           }else{
+               nameList.push(array[i].name);
            }
-;
+
         }
     }
-    return false;
+    
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -178,8 +167,9 @@ function nonFriends(name, array) {
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-    // object = Object.hasOwnProperty(key);//check existance of key and add it if need be
-    // object["key"] = value;//add new value to key
+    
+    object = Object.hasOwnProperty(key);//check existance of key and add it if need be
+    object["key"] = value;//add new value to key
     
 }
 
@@ -188,13 +178,13 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-// for(var i = 0; i < object.length; i++){
-//     for(var j = 0; j < array.length; i++){
-//         if(object[i] === array[j]{
-//             remove object[i];
-//         })
-//     }
-// }
+for(var i = 0; i < object.length; i++){
+    for(var j = 0; j < array.length; i++){
+        if(object[i] === array[j]){
+            delete object[i];
+        }
+    }
+}
 }
 
 //////////////////////////////////////////////////////////////////////

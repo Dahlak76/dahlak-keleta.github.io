@@ -184,9 +184,10 @@ _.indexOf = function(arr, value){
 //return index of arr at first occurance and stop loop
 for(var i = 0; i < arr.length; i++){
     if(value === arr[i]){
-        return i
+        return i;
     }
-   }return - 1;
+   }
+   return - 1;          //return -1 if value not there
 }
 
 /** _.contains
@@ -204,8 +205,9 @@ for(var i = 0; i < arr.length; i++){
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 _.contains = function(arr, value){
-
-}
+    return (arr.includes(value) ? true : false); //return true if value exists in array
+    }    
+    
 
 /** _.each
 * Arguments:
@@ -222,10 +224,23 @@ _.contains = function(arr, value){
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
-_.each = function(coll, func){
-
+_.each = function(collection, func){
+//if an array is array, call the function once for each element
+//with arguments- the element, its index, and collection
+if (Array.isArray(collection)) {
+    for(var i = 0; i < collection.length; i++){
+      func(collection[i], i, collection);
+        
+    }
+//if its an object, call the function once for each property
+// with arguments- property value, its key and collection
+}else if (typeof(collection) === "object" && collection !== null){
+    for (var key in collection) {
+      func(collection[key], key, collection);
+    
+    }
 }
-
+}
 /** _.unique
 * Arguments:
 *   1) An array
@@ -235,8 +250,18 @@ _.each = function(coll, func){
 * Examples:
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
-
-
+_.unique = function(array){
+     var newArray = []; 
+                                                        //return new array with no copies using indexof from above
+        for (var i = 0; i < array.length; i++){          //for loop
+            if (this.indexOf(newArray, array[i]) < 0) {      //if indexof itteration for equal
+               newArray.push(array[i]);                                       //push new arr
+    }
+    
+}
+   return newArray;                                                     // let unique = [...new Set(array)];
+                                                        // return unique;
+}
 /** _.filter
 * Arguments:
 *   1) An array
@@ -252,7 +277,16 @@ _.each = function(coll, func){
 * Extra Credit:
 *   use _.each in your implementation
 */
-
+_.filter = function (arr, func) {
+   var newArray = [];                         //function call each element in array passing
+    for (var i = 0; i < arr.length; i++){
+        if(func(arr[i], i, arr)){
+            newArray.push(arr[i]);
+    }
+    } 
+    return newArray;                                //the element, index and array
+}                                       //return new array if elements true
+                                       //???return other than true(null, string, nan...??)
 
 /** _.reject
 * Arguments:
@@ -266,7 +300,15 @@ _.each = function(coll, func){
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
-
+_.reject = function(array, func){
+    var newArray = [];
+    for (var i = 0; i < array.length; i++) {
+       if (func(array[i], i, array) === false) {
+           newArray.push(array[i]);
+       }
+    }
+    return newArray;
+}
 
 /** _.partition
 * Arguments:
@@ -286,6 +328,22 @@ _.each = function(coll, func){
 *   }); -> [[2,4],[1,3,5]]
 }
 */
+_.partition = function(array, func) {
+    var arrays = [];
+    var truthy = [];
+    var falsey = [];
+    for (var i = 0; i < array.length; i++) {
+        if (func(array[i], i , array)) {
+            truthy.push(array[i]);
+          }  else if (func(array[i], i, array) === false) {
+              falsey.push(array[i]);
+          } 
+      }
+      arrays.push(truthy, falsey);
+      // return subArray => [[truthy], [falsey]];
+ return arrays;
+}
+
 
 
 /** _.map
@@ -303,7 +361,34 @@ _.each = function(coll, func){
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-
+// _.map = function(collection, func) {
+//     var newArr = [];                                //new container for the return
+//     var newObj = [];                                                    //loop through collection
+//          if (Array.isArray(collection)){
+//             for(var i = 0; i < collection.length; i++){
+//            newArr.push(func(collection[i], i, collection));
+//          }                                         //if array is array, func call e,i,c
+//     } else if(typeof(collection) === "object" && collection !== null) {
+//         for(var key in collection) {
+//             newObj.push(func(collection[key], key, collection));
+//                                                                                                       //if object, func call v,k,c
+// }                                                   //push into newarr
+// }                                                        //return newarr
+_.map = function(collection, func) {
+    var newVal = [];
+    if (Array.isArray(collection)) {
+                                                    //iterate though collection to access it's values and indexes
+        for (var i = 0; i < collection.length; i++) {
+                                                    //call func with args: collection[i], i, collection
+            newVal.push(func(collection[i], i, collection));
+        }
+    } else if (typeof collection === "object" && collection !== null) {
+        for (var key in collection ) {
+            newVal.push(func(collection[key], key, collection));
+        }
+    }
+    return newVal;
+}
 
 /** _.pluck
 * Arguments:
@@ -315,6 +400,14 @@ _.each = function(coll, func){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+_.pluck = function (array, property) {
+    var newArray = [];
+   //console.log(array, property);
+   newArray = this.map(array, function(element){
+      return element[property];
+   });
+  return newArray;
+}
 
 
 /** _.every
@@ -337,6 +430,44 @@ _.each = function(coll, func){
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
+_.every = function(collection, func){
+    if(func === undefined){
+       if(Array.isArray(collection)){
+           for(var i = 0; i < collection.length;i++){
+               if(func(collection[i], i, collection) === false){
+                   return false;
+               }
+           }
+           return true;
+       } 
+    } else{
+        for(var key in collection){
+            if(func(collection[key], key, collection) === false){
+                return false;
+            }
+        }
+        return true;
+    }
+    if(Array.isArray(collection)){
+        for(var i = 0; i < collection.length; i++){
+            if(func(collection[i], i, collection) === false){
+                return false;
+        }
+        return true;
+    }
+
+ }  else{
+     for(var key in collection){
+        if(func(collection[key], key, collection) === false){
+                return false;
+            }
+        }
+        return true;
+        }
+        
+    }
+    
+    
 
 
 /** _.some
@@ -359,7 +490,24 @@ _.each = function(coll, func){
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
+_.some = function(collection, func){
+    if(Array.isArray(collection)){
+        for(var i = 0; i < collection.length; i++){
+            if(func(collection[i], i, collection) === true){
+                return true;
+        }
+        return false;
+    }
 
+ }  else{
+     for(var key in collection){
+        if(func(collection[key], key, collection) === true){
+                return true;
+            }
+        }
+        }
+        return false;
+    }
 
 /** _.reduce
 * Arguments:
@@ -379,7 +527,19 @@ _.each = function(coll, func){
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
-
+_.reduce = function(array, func, seed){
+    if (seed === undefined) {
+        seed = array[0];
+        for (var i = 1; i < array.length; i++) {
+            seed = func(seed, array[i], i);
+        }
+    } else {
+        for (var i = 0; i < array.length; i++) {
+            seed = func(seed, array[i], i)
+        }
+    }
+    return seed;
+}
 
 /** _.extend
 * Arguments:
@@ -395,7 +555,9 @@ _.each = function(coll, func){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+_.extend = function(object1, object2){
 
+}
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
