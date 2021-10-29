@@ -431,41 +431,38 @@ _.pluck = function (array, property) {
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 _.every = function(collection, func){
-    if(func === undefined){
-       if(Array.isArray(collection)){
-           for(var i = 0; i < collection.length;i++){
-               if(func(collection[i], i, collection) === false){
-                   return false;
-               }
-           }
-           return true;
-       } 
-    } else{
-        for(var key in collection){
-            if(func(collection[key], key, collection) === false){
-                return false;
+   
+        var truthy = true;
+        if (!func) {
+         if (Array.isArray(collection)) {
+          for (var k = 0; k < collection.length; k++) {
+            if (!collection[k]) {
+              truthy = false;
             }
-        }
-        return true;
-    }
-    if(Array.isArray(collection)){
-        for(var i = 0; i < collection.length; i++){
-            if(func(collection[i], i, collection) === false){
-                return false;
-        }
-        return true;
-    }
-
- }  else{
-     for(var key in collection){
-        if(func(collection[key], key, collection) === false){
-                return false;
+          }
+        } else if (typeof collection === "object") {
+          for (var key in collection) {
+            if (collection[key] === false) {
+              truthy = false
             }
+          }
+        } 
+      } else if (Array.isArray(collection)) {
+        for (var i = 0; i < collection.length; i++) {
+          if (func(collection[i], i, collection) === false) {
+            truthy = false;
+          } 
         }
-        return true;
-        }
-        
-    }
+      } else if (typeof collection === "object") {
+        for (var key in collection) {
+          if (func(collection[key], key, collection) === false ) {
+            truthy = false;
+          }
+        }   
+      }
+      return truthy;
+     }
+  
     
     
 
@@ -491,23 +488,36 @@ _.every = function(collection, func){
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 _.some = function(collection, func){
-    if(Array.isArray(collection)){
-        for(var i = 0; i < collection.length; i++){
-            if(func(collection[i], i, collection) === true){
-                return true;
+    var falsey = false;
+    if (!func) {
+     if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        if (collection[i]) {
+          falsey = true;
         }
-        return false;
+      }
+    } else if (typeof collection === "object") {
+      for (var key in collection) {
+        if (!collection[key]) {
+          falsey = true;
+        }
+      }
+    } 
+  } else if (Array.isArray(collection)) {
+    for (var i = 0; i < collection.length; i++) {
+      if (func(collection[i], i, collection)) {
+        falsey = true;
+      } 
     }
-
- }  else{
-     for(var key in collection){
-        if(func(collection[key], key, collection) === true){
-                return true;
-            }
-        }
-        }
-        return false;
-    }
+  } else if (typeof collection === "object") {
+    for (var key in collection) {
+      if (func(collection[key], key, collection)) {
+        falsey = true;
+      }
+    }   
+  }
+  return falsey;
+  }
 
 /** _.reduce
 * Arguments:
@@ -555,9 +565,14 @@ _.reduce = function(array, func, seed){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
-_.extend = function(object1, object2){
+_.extend = function(object, object1, object2){
+        
+    Object.assign(object, object1, object2);
+       
+       return object;
+      }
+      
 
-}
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////

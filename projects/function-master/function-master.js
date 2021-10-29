@@ -146,20 +146,17 @@ function isFriend(name, object) {
 //   ];
 function nonFriends(name, array) {
    var nameList = [];
-   var output= [];
-   var current = null;
     // declare array that equals name parameter and friends properties
     for(var i = 0; i < array.length; i++){
-        if(name === array[i].name){
-           if(array[i].friends.includes(array[i].name) === false){
-               current.push(array[i]);
-           }else{
+        if(name !== array[i].name){
+           if(array[i].friends.includes(name) === false){
                nameList.push(array[i].name);
            }
 
         }
+        
     }
-    
+    return nameList;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -167,10 +164,8 @@ function nonFriends(name, array) {
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-    
-    object = Object.hasOwnProperty(key);//check existance of key and add it if need be
-    object["key"] = value;//add new value to key
-    
+    object[key] = value;//add new value to key
+    return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -178,14 +173,15 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-for(var i = 0; i < object.length; i++){
-    for(var j = 0; j < array.length; i++){
-        if(object[i] === array[j]){
-            delete object[i];
+for(var i = 0; i < array.length; i++){
+    
+        if(object[array[i]] !== undefined){
+            delete object[array[i]];
         }
     }
+    return object;
 }
-}
+
 
 //////////////////////////////////////////////////////////////////////
 // Function 16 - Dedup ///////////////////////////////////////////////
