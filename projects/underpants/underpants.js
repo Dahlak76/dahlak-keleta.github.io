@@ -402,7 +402,7 @@ _.map = function(collection, func) {
 */
 _.pluck = function (array, property) {
     var newArray = [];
-   //console.log(array, property);
+   
    newArray = this.map(array, function(element){
       return element[property];
    });
@@ -435,8 +435,8 @@ _.every = function(collection, func){
         var truthy = true;
         if (!func) {
          if (Array.isArray(collection)) {
-          for (var k = 0; k < collection.length; k++) {
-            if (!collection[k]) {
+          for (var i = 0; i < collection.length; i++) {
+            if (!collection[i]) {
               truthy = false;
             }
           }

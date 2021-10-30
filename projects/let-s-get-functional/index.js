@@ -22,10 +22,28 @@ var _ = require('underbar');
  */
 
 var maleCount = function(array) {
-
+    //using filter to grab only the male customer objects
+    return _.filter(array, function(customerObj){
+        //returning only objects with gender property that strictly equal 'male'
+        return customerObj.gender === "male";
+        //using .length to get the number of male objects in newly filtered array
+    }).length
 };
 
-var femaleCount;
+var femaleCount = function(array){
+    //set variable for reduce function (ladies)
+    //assigning accumulator  parameter to count and customerObj to current
+    let ladies = _.reduce(array, function(count, customerObj){
+        //using conditional to identify female from each customerObj 
+      if(customerObj.gender === "female"){
+          //add each iteration of female to count
+          count++;
+      }  
+      return count;
+      //assigning seed to number to later return a number(the count); count = seed
+    }, 0)
+    return ladies;
+};
 
 var oldestCustomer;
 
