@@ -42,10 +42,19 @@ var femaleCount = function(array){
       return count;
       //assigning seed to number to later return a number(the count); count = seed
     }, 0)
-    return ladies;
+      return ladies;
 };
 
-var oldestCustomer;
+var oldestCustomer = function(array){
+    let oldCust = _.filter(array,function(count, currentAge){
+        var oldestCust = 0;                          //creatte new var for oldest cust                                        //loop thru arr to find oldest cust
+        if(currentAge.age > count)                   //if current is greater than previous
+           oldestCust = currentAge.age;
+           count++;                                  //return value to new arr
+    })  
+    return oldestCust;                               //return cust name in string
+};
+    return oldestCust.name = "";
 
 var youngestCustomer;
 
