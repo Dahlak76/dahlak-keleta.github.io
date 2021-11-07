@@ -4,6 +4,9 @@
 
 var customers = require('./data/customers.json');
 var _ = require('underbar');
+// const { typeOf } = require('../underpants/underpants');
+// const { slice } = require('lodash');
+// const _ = require('lodash');
 
 /**
  * 1. Import your lodown module using the require() method,
@@ -46,25 +49,98 @@ var femaleCount = function(array){
 };
 
 var oldestCustomer = function(array){
-    let oldCust = _.filter(array,function(count, currentAge){
-        var oldestCust = 0;                          //creatte new var for oldest cust                                        //loop thru arr to find oldest cust
-        if(currentAge.age > count)                   //if current is greater than previous
-           oldestCust = currentAge.age;
-           count++;                                  //return value to new arr
+    let oldestCustomer = _.reduce(array,function(previous, current){
+                                                 //creatte new var for oldest cust                                        //loop thru arr to find oldest cust
+        if(previous.age > current.age){
+            return previous;
+        }  else{
+            return current;
+        }                                           //if current is greater than previous
+           
+                                                    //return value to new arr
     })  
-    return oldestCust;                               //return cust name in string
+                                  //return cust name in string
+
+    return oldestCustomer.name;
 };
-    return oldestCust.name = "";
+var youngestCustomer = function(array){
+    let youngestCustomer = _.reduce(array,function(previous, current){
+        if(previous.age < current.age){
+            return previous;
+        }else{
+            return current;
+        }
+    })
+    return youngestCustomer.name;
+};
 
-var youngestCustomer;
+  var averageBalance = function(array){
+                                                        // convert string to number, remove $ and commas
+                                                        //use map to iterate thru new arr to get balance
+ var reduced = customers.reduce(function(previous, current){        //declare var reduced, use reduce to get total of balance
+    var currbalance = Number(current.balance.replace(/[$,]/g, '')); //declare var and make it a number, for balance, use regex to replace $ & ,
+    
+    return currbalance+= previous;          //return current bal to add to previous
+     }, 0);                                     //add a seed just incase
+     
+     var average = reduced / customers.length;  //declare var for avrage to equal the reduced which is total divided by cust.length
+     
+    return average;                         //return avrage
 
-var averageBalance;
+ };
 
-var firstLetterCount;
+                             
 
-var friendFirstLetterCount;
+var firstLetterCount = function(customers, letter){
+    var customersFirstLetter = _.filter(customers, function(custObj, index, collection){
+           // make sure its case sensitve
+           // check and see if name[0] is equal to the letter thay we are checking for
+           // if true then we want return the names that meet that condition
+                   if(custObj.name[0].toUpperCase() === letter.toUpperCase()){
+                       return custObj.name
+                   }
+           
+               });
+           
+               return customersFirstLetter.length
+   
+   
+   };
 
-var friendsCount;
+
+
+var friendFirstLetterCount = function(array, customer, letter){
+    var customerList = _.filter(array, function(custObj){
+        if(custObj.name === customer) {
+            return true;
+        }
+        return false;
+            
+    })
+    var friends = customerList[0].friends;
+
+    var startsWith = _.reduce(friends, function(startsWith, friend){
+    
+        if(friend.name[0].toLowerCase() === letter.toLowerCase()){
+            startsWith += 1;
+        }
+        return startsWith;
+    }, 0);
+    return startsWith;
+};
+
+var friendsCount = function(customers, givenName) {
+    //filter thru cust arr to access each cust obj
+    var friendList = _filter(customers, function(customer) {
+        var friends = customer.friends;
+        for(var i = 0; i < friends.length; i++){
+            if(friends[i].name === givenName){
+                return true;
+            }
+        }
+    }).map(customer => customer.name);
+    return friendList;
+};
 
 var topThreeTags;
 

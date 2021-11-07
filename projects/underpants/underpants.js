@@ -361,19 +361,7 @@ _.partition = function(array, func) {
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-// _.map = function(collection, func) {
-//     var newArr = [];                                //new container for the return
-//     var newObj = [];                                                    //loop through collection
-//          if (Array.isArray(collection)){
-//             for(var i = 0; i < collection.length; i++){
-//            newArr.push(func(collection[i], i, collection));
-//          }                                         //if array is array, func call e,i,c
-//     } else if(typeof(collection) === "object" && collection !== null) {
-//         for(var key in collection) {
-//             newObj.push(func(collection[key], key, collection));
-//                                                                                                       //if object, func call v,k,c
-// }                                                   //push into newarr
-// }                                                        //return newarr
+                                                       //return newarr
 _.map = function(collection, func) {
     var newVal = [];
     if (Array.isArray(collection)) {
