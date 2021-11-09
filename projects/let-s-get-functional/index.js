@@ -4,6 +4,8 @@
 
 var customers = require('./data/customers.json');
 var _ = require('underbar');
+// const _ = require('lodash');
+// const _ = require('lodash');
 // const { typeOf } = require('../underpants/underpants');
 // const { slice } = require('lodash');
 // const _ = require('lodash');
@@ -77,7 +79,7 @@ var youngestCustomer = function(array){
   var averageBalance = function(array){
                                                         // convert string to number, remove $ and commas
                                                         //use map to iterate thru new arr to get balance
- var reduced = customers.reduce(function(previous, current){        //declare var reduced, use reduce to get total of balance
+ var reduced = _.reduce(customers, function(previous, current){        //declare var reduced, use reduce to get total of balance
     var currbalance = Number(current.balance.replace(/[$,]/g, '')); //declare var and make it a number, for balance, use regex to replace $ & ,
     
     return currbalance+= previous;          //return current bal to add to previous
@@ -131,7 +133,7 @@ var friendFirstLetterCount = function(array, customer, letter){
 
 var friendsCount = function(customers, givenName) {
     //filter thru cust arr to access each cust obj
-    var friendList = _filter(customers, function(customer) {
+    var friendList = _.filter(customers, function(customer) {
         var friends = customer.friends;
         for(var i = 0; i < friends.length; i++){
             if(friends[i].name === givenName){
@@ -142,9 +144,38 @@ var friendsCount = function(customers, givenName) {
     return friendList;
 };
 
-var topThreeTags;
 
-var genderCount;
+var topThreeTags = function(array){
+    var tagsArr = [];
+        for(var i = 0; i < array.length; i++){
+            var tags = array[i].tags;
+            for(var j = 0; j < array.length; j++){
+                tagsArr.push(tags[j]);
+            }
+        }
+        
+        var tagsCount = _.reduce(tagsCount, function(count, tag){
+            if(count[tag]){
+                count[tag] += 1;
+            }else{
+                count[tag] = 1;
+            }
+            return count;
+        }, {})
+        return tagsCount;
+};
+
+var genderCount = function(array){
+    var genderCountObj = _.reduce(array, function(previous, current, index, array) {
+        if(previous[current.gender] === undefined) {
+            previous[current.gender] = 1;
+        } else {
+            previous[current.gender] += 1;
+        }
+        return previous;
+    }, {});
+    return genderCountObj;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
