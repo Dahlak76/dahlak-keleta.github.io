@@ -149,12 +149,12 @@ var topThreeTags = function(array){
     var tagsArr = [];
         for(var i = 0; i < array.length; i++){
             var tags = array[i].tags;
-            for(var j = 0; j < array.length; j++){
+            for(var j = 0; j < tags.length; j++){
                 tagsArr.push(tags[j]);
             }
         }
         
-        var tagsCount = _.reduce(tagsCount, function(count, tag){
+        var tagsCount = _.reduce(tagsArr, function(count, tag){
             if(count[tag]){
                 count[tag] += 1;
             }else{
@@ -162,7 +162,15 @@ var topThreeTags = function(array){
             }
             return count;
         }, {})
-        return tagsCount;
+        
+        var tagsCountArr = Object.entries(tagsCount);
+        var sortedArr = tagsCountArr.sort((a, b) => b[1] - a[1]);
+    
+        var returnArr = [];
+        returnArr.push(sortedArr[0][0]);
+        returnArr.push(sortedArr[1][0]);
+        returnArr.push(sortedArr[2][0]);
+        return returnArr;
 };
 
 var genderCount = function(array){
