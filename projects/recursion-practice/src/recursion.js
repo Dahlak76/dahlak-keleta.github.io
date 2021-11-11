@@ -186,16 +186,43 @@ var gcd = function(x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
+
 var compareStr = function(str1, str2) {
+  
+  //base
+  if (str1 === "" && str2 === "") {
+    return true;
+  }
+  if (str1[0] !== str2[0]) {
+    return false;
+  } else {
+    return compareStr(str1.slice(1), str2.slice(1));
+  } 
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-var createArray = function(str){
+var createArray = function(str, newArr=[]){
+ //base
+if(str.length === 0){
+  return newArr;
+}
+ //recursion
+  newArr.push(str[0]);
+  return createArray(str.slice(1), newArr);
+  
 };
 
 // 17. Reverse the order of an array
 var reverseArr = function (array) {
+  var newArr = [];
+//base
+if(str.length === 0){
+  return newArr;
+}
+//recursion
+newArr.push(str.length - 1);
+return reverseArr(str.slice(-1), newArr);
 };
 
 // 18. Create a new array with a given value and length.
@@ -308,12 +335,41 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  if(array.length === 0){
+    return [];
+  }else{
+    return [Math.abs(array[0]), -Math.abs(array[1]), ...alternateSign(array.slice(2))];
+  }
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function(str) {
+var numToText = function(str, returnStr="") {
+  var obj = {
+    1: "one",
+    2: "two",
+    3: "three",
+    4: "four",
+    5: "five",
+    6: "six",
+    7: "seven",
+    8: "eight",
+    9: "nine"
+  };
+
+// base case
+if (str.length === 0) {
+  return returnStr;
+} 
+//recursive 
+if (!Object.keys(obj).includes(str[0])) {
+  returnStr += str[0];
+} else {
+  var newString = obj[str[0]] + str.slice(1);
+  return numToText(newString, returnStr);
+}
+return numToText(str.slice(1), returnStr);
 };
 
 // *** EXTRA CREDIT ***
