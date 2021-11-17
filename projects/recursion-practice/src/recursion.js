@@ -215,31 +215,46 @@ if(str.length === 0){
 
 // 17. Reverse the order of an array
 var reverseArr = function (array) {
-  var newArr = [];
 //base
-if(str.length === 0){
-  return newArr;
-}
-//recursion
-newArr.push(str.length - 1);
-return reverseArr(str.slice(-1), newArr);
+let reverseArray = [];
+if (array.length === 0)
+return reverseArray;
+//recursive 
+reverseArray.push(array.pop());
+return reverseArray.concat(reverseArr(array));
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length) {
+  if (length === 0) return [];
+  var newArr = buildList(value, length - 1);
+  newArr.push(value);
+  return newArr;
 };
 
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function(array, value) {
+  if (array.length === 0) {
+    return 0;
+  }
+  if (array[0] === value) {
+    return 1 + countOccurrence(array.slice(1), value);
+  } else {
+    return countOccurrence(array.slice(1), value);
+  }
 };
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
+  if (array.length === 0) {
+    return [];
+  }
+  return [callback(array[0])].concat(rMap(array.slice(1), callback));
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -275,17 +290,36 @@ var fibonacci = function(n) {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
+  if (n < 0) {
+    return null;
+  }
+  if (n < 0) {
+    return 0;
+  }
+  if (n === 1) {
+    return 1;
+  }
+  return nthFibo(n-1) + nthFibo(n-2)
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function(input) {
+  if (input.length === 0) {
+    return [];
+  }
+  return [input[0].toUpperCase()].concat(capitalizeWords(input.slice(1)));
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
 var capitalizeFirst = function(array) {
+  if (array.length === 0) {
+    return [];
+  }
+  return [array[0][0].toUpperCase().concat(array[0].slice(1))].concat
+  (capitalizeFirst(array.slice(1)));
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -307,7 +341,17 @@ var flatten = function(arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
+var letterTally = function(str, obj = {}) {
+  if (str.length === 0) {
+    return obj;
+  }
+  if (!obj[str[0]]) {
+  obj[str[0]] = 1;
+  }
+  else if (obj[str[0]]) {
+    obj[str[0]]++;
+  }
+  return letterTally(str.slice(1), obj);
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -316,6 +360,13 @@ var letterTally = function(str, obj) {
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 var compress = function(list) {
+  if(list.length === 0) {
+    return [];
+  }
+  if (list[0] !== list[1]) {
+    return [list[0]].concat(compress(list.slice(1)));
+  }
+  return compress(list.slice(1));
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -328,6 +379,13 @@ var augmentElements = function(array, aug) {
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
+  if(array.length === 0) {
+    return [];
+  }
+  if(array[0] !== array[1] || array[0] !== 0) {
+    return [array[0]].concat(minimizeZeroes(array.slice(1)));
+  }
+  return minimizeZeroes((array.slice(1)));
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
