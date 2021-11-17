@@ -19,4 +19,4 @@ if(x === 1) {
     return false;
 }
 //in the above example, the flow stops at the first if condition and doesnt need to continue
-//because the first condition hasbeen met
+//because the first condition has been met
